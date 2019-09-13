@@ -25,17 +25,21 @@ from sqlalchemy import create_engine
 点开一看，令我瞬间起了邪念。如果你懂一点前端或者爬虫的知识，我相信你的反应也会和我一样。我x，这一块块一筐筐的排版方式不就是爬虫的天堂吗？
 
 所以我果断鼠标右键 -> 查看网页源代码。往下拉一拉，马上乐开花。
+![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-78388311e80058fc0a92d1eed36fa950_b.png?raw=true)
 
 这也太友好了，数据都直接写在源代码里了，连寻找Ajax动态API的步骤都省了。所以果断Python走你。
+
+```python
 def get_html(url):
     headers = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko)'}
     resp = requests.get(url, headers=headers)
     return resp.text
 
-
 url = 'https://tophub.today'
 html = get_html(url)
 print(html)
+```
+
 print出来看看。perfect，一点防爬虫的措施都没有，完美的下载了网页源代码的所有内容。
 好，接下来就是怎么寻找自己需要的数据了呗。回到网页上，鼠标右击 -> 检查。
 
