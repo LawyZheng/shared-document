@@ -24,8 +24,11 @@ from sqlalchemy import create_engine
 
 点开一看，令我瞬间起了邪念。如果你懂一点前端或者爬虫的知识，我相信你的反应也会和我一样。我x，这一块块一筐筐的排版方式不就是爬虫的天堂吗？
 
-所以我果断鼠标右键 -> 查看网页源代码。往下拉一拉，马上乐开花。
 ![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-78388311e80058fc0a92d1eed36fa950_b.png?raw=true)
+
+所以我果断鼠标右键 -> 查看网页源代码。往下拉一拉，马上乐开花。
+
+![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-5e57a3fc637b3e2e1505ff72fb44a41b_b.png?raw=true)
 
 这也太友好了，数据都直接写在源代码里了，连寻找Ajax动态API的步骤都省了。所以果断Python走你。
 
@@ -43,14 +46,19 @@ print(html)
 print出来看看。perfect，一点防爬虫的措施都没有，完美的下载了网页源代码的所有内容。
 
 好，接下来就是怎么寻找自己需要的数据了呗。回到网页上，鼠标右击 -> 检查。
-![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-5e57a3fc637b3e2e1505ff72fb44a41b_b.png?raw=true)
+
+![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-5c7e93a3496e51c2aee9d431cb2f9b97_b.png?raw=true)
 
 
-鼠标点击这个按钮，让他变成蓝色（Chrome是蓝色的，其他浏览器不知道是不是蓝色）。然后移动你的鼠标到微博的空白区域，直到你看到微博这个区块都变成了蓝色。再看看下面的那个代码部分，把<div class="cc-cd" id="node-1">这个标签关上。
+鼠标点击这个按钮，让他变成蓝色（Chrome是蓝色的，其他浏览器不知道是不是蓝色）。然后移动你的鼠标到微博的空白区域，直到你看到微博这个区块都变成了蓝色。再看看下面的那个代码部分，把 &lt;div class="cc-cd" id="node-1"&gt; 这个标签关上。
+
+![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-6c45c27d5c9e25923bc87caee1abd1ae_b.png?raw=true)
 
 鼠标反复在下面四个标签上移动几下，可以看到这个蓝色的框框会在微博、知乎这些区块之间跳来跳去。
 
-好的，到这我们已经不难看出规律了。这些<div class="cc-cd" id="xxxx">的标签就是用来管理一个个区块榜单的，那我们要获取的榜单数据自然都在这里面，所以用BeautifulSoup把这些都筛选出来就完事了呗。
+好的，到这我们已经不难看出规律了。这些 &lt;div class="cc-cd" id="xxxx"&gt; 的标签就是用来管理一个个区块榜单的，那我们要获取的榜单数据自然都在这里面，所以用BeautifulSoup把这些都筛选出来就完事了呗。
+
+![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-631b94c3ffd4c1a33a124af2998ba3bc_b.png?raw=true)
 
 
 ```python
@@ -75,7 +83,11 @@ df = pandas.DataFrame()
 
 用之前寻找榜单区块的方法，不难找到。榜单的名字是在 &lt;div class="cc-cd-lb"&gt;这个标签下的。
 
-而里面一条条的榜单数据，都是在 &lt;div class="cc-cd-cd-l nano-content"&gt; 标签里 &lt;a href="xxxxxx"&gt; 标签下的 &lt;span class="t"&gt;标签里的。
+![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-5d7dadd9018960515f8569be7b562ffd_b.png?raw=true)
+
+而里面一条条的榜单数据，都是在 &lt;div class="cc-cd-cd-l nano-content"&gt; 标签里 &lt;a href="xxxxxx"&gt; 标签下的 &lt;span class="t"&gt; 标签里的。
+
+![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-631f8709c42f4c7820d1d34213aa237f_b.png?raw=true)
 
 OK，那就得咯，代码走你。
 
