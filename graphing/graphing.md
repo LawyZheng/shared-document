@@ -27,7 +27,7 @@
 
 不出意外的话你的浏览器会自动打开，并弹出以下这个页面。
 
-![](pic1.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic1.png)
 
 可以看到我当前的文件夹下有一个存放着我数据的csv文件，另外那个.ipynb的文件是jupyter的项目文件，这个文件是需要自己创建的。创建的方法就是点击New -> Python3。 然后就会跳转到一个新的页面了。
 
@@ -61,7 +61,7 @@ pandas读取csv文件，excel文件，都有对应的 pandas.read_xxx 方法。�
 ```python
 data.head(10)
 ```
-![](pic2.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic2.png)
 
 因为在我后面的数据处理中，没有用到 Stay&#95;In&#95;Current&#95;City&#95;Years 、Marital&#95;Status 、Product&#95;Category&#95;1 、 Product&#95;Category&#95;2 、 Product_Category&#95;3 这些列里的数据，所以先把他们筛选除去。
 
@@ -72,7 +72,7 @@ data = data[['User_ID', 'Product_ID', 'Gender' ,
 data.head(10)
 ``` 
 
-![](pic3.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic3.png)
 
 可以看到只剩下我想要的这几列数据了。接着我们要养成数据分析前的好习惯，查看以下数据的个数啊，以及有没有缺失值啊等基本的信息。
 
@@ -126,7 +126,7 @@ pandas筛选数据的方法很多，这里用了pivot_table进行筛选，用这
 gender_data
 ```
 
-![](pic4.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic4.png)
 
 可以看到结果非常棒，筛选出了我想要的数据。并且Purchase列中的数值都被赋值成了累加的结果。
 
@@ -163,7 +163,7 @@ for循环绘制好图之后，需要通过go.Figure()函数把图画在画布上
 
 最后再通过show()方法展示出来就可以了。
 
-![](pic5.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic5.png)
 
 好吧，不得不说。老美的男人要比女人狠太多了。
 
@@ -191,7 +191,7 @@ px.line(age_data, y='Purchase', x='Age',
 
 参数也很好理解，数据表、y轴、x轴，以及图标的标题（可有可无）。
 
-![](pic8.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic8.png)
 
 再用饼状图看看各个年龄段的消费占比情况。
 
@@ -205,7 +205,7 @@ go.Figure(data=trace,
 
 饼状图的绘制和柱状图是一样的。所以会稍微麻烦一点点。不过也还是不难理解的，labels参数表示类别，values参数表示具体的值，hole参数（可选可不选）可以设置饼状图中间的空洞大小（范围是0到1，值越大，环就越细）。我个人是觉得中间空出一点点的图看上去要舒服一点。
 
-![](pic9.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic9.png)
 
 ### 每个人的消费情况
 
@@ -233,7 +233,7 @@ px.box(gender_dataframe, y='Purchase', x='Gender',
 
 参数很简单，第一个是需要绘制的DataFrame数据，第二个是y轴对应的列，第三个是x轴对应的分类（其实这个参数可以省略的，因为这里想分别查看男性和女性的数据情况，所以加入了x轴参数进行分类），第四个就是图的标题。最后不要忘了用show()展示出来就行了。
 
-![](pic6.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic6.png)
 
 可以看到一分位，中位数，四分位，都展示出来了。而且男女也被分开展示出来了。
 
@@ -246,7 +246,7 @@ px.histogram(gender_dataframe, x='Purchase',
 
 直方图的y轴一般都是频率，所以只用传入x轴的数据。然后用不同的颜色区分出性别，所以加上一个color参数就可以了。
 
-![](pic7.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic7.png)
 
 可以看到大部分人的消费金额都落在 100k 到 500k 这个区别里。不知道这个数据的金额单位是不是美元，要是美元的话老美的人也太富裕了吧。
 
@@ -261,7 +261,7 @@ city_data = pandas.pivot_table(data, values = 'Purchase',
 city_data
 ```
 
-![](pic10.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic10.png)
 
 可以看到，消费总额来说的话，B类城市 > C类城市 > A类城市。
 
@@ -295,7 +295,7 @@ money_counting_data = money_data.merge(counting_data)
 money_counting_data
 ```
 
-![](pic11.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic11.png)
 
 可以看到，数据表中已经有了消费金额和购买数量两列数据。不过事实上这里可以通过pivot&#95;table的aggfunc参数进行一步到位的筛选。但因为想多普及一下pandas的基础知识，就用了merge的办法。
 
@@ -308,8 +308,12 @@ px.scatter(money_counting_data, x='Purchase', y='Counting',
 
 散点图属于常用的统计图，所以绘制的参数并不复杂。只要搞清楚x轴和y轴，其他的参数和绘制直方图是一样的。
 
-![](pic12.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/graphing/pic12.png)
 
 综合之前查看的每类城市的消费总额，不难看出来。虽然A类城市的消费总额最少，但是买的个数最多，消费金额最多的人基本都是来自A类城市的。而B类城市是购买的绝对主力军。C类城市虽然有这不少的消费总额，但每个人都是小额小量的购买。
 
 结果虽然无法很明显的分类出三种城市的消费情况，但是嘛，还是可以从整体看出消费金额和购买数量是呈线性关系的（这显然是屁话，买的越多当然花的也越多，两者不呈线性关系才有鬼）。
+
+[GitHub源码地址](https://github.com/LawyZheng/greedyai_learning/tree/master/greedyai_week8)
+
+[知乎链接](https://zhuanlan.zhihu.com/p/83647657)
