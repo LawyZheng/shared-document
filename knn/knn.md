@@ -34,7 +34,7 @@ def create_sample_data():
 
 这段代码看不懂也没关系，大致意思就是围绕以上这三个点，以0.6的标准差随机创建60个点的数据。返回的x代表每个点的坐标，y代表每个点属于哪个中心点的辐射范围。直接来看一下图可能会比较好理解一点。
 
-![](plot1.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/knn/plot1.png)
 
 通过图片可以明显看出来，这所有的点都是围绕三个中心点分布的。如果把这所有的数据看成一个整体，那么实际上这些点可以归位三类，就是黄、蓝、红三个群体。
 
@@ -91,7 +91,7 @@ print(nearest_points)
 
 可以看到返回的数据中，最近的是属于类别0，索引为16的点。但其实在最近的5个点中有3个点是属于类别1的。所以这个点大概率是属于类别1，而不是类别0。还是画个图吧，毕竟没图你说个xx呢。
 
-![](plot2.png)
+![](https://raw.githubusercontent.com/LawyZheng/shared-document/master/knn/plot2.png)
 
 图上可以看出来，距离待测点 (0, 2) 最近的5个点都被用线连接上了，有三条都是和蓝色的群体相连的，有两条是和红色的群体相连的。所以就概率学和统计学的角度来说，那待测点大概率应该是属于蓝色群体的。
 
@@ -253,5 +253,8 @@ print(get_knn_accuracy(iris_data, iris_type, 10))
 
 说到这，那人工智能的本质是什么呢。就是通过对特征量的进行一些计算，将目标事物进行了归类，给出一个判断而已。这是从最简单，最本质的视角去解释人工智能，当然在这简单的本质背后，是需要大量的深入研究作为基础的。比如，要怎么抽取特征量才能最准确的分出类别，要怎么设置模型的参数，这些都是需要研发人员去深究的。
 
+[GitHub源码链接](https://github.com/LawyZheng/greedyai_learning/tree/master/greedyai_week9)
+
+[知乎链接](https://zhuanlan.zhihu.com/p/84886024)
 
 
