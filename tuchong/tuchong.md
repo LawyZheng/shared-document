@@ -26,11 +26,11 @@ import requests
 
 先去官网看看。
 
-<img src="1.png" width="100%">
+<img src="https://raw.githubusercontent.com/LawyZheng/shared-document/master/tuchong/1.png" width="100%">
 
 点社区，不要直接在图库里搜索关键字，别问我为什么知道的。有兴趣的话，可以自己试一下爬取图库里的数据。
 
-<img src="2.png" width="100%">
+<img src="https://raw.githubusercontent.com/LawyZheng/shared-document/master/tuchong/2.png" width="100%">
 
 在上面的导航栏里输入想搜索的关键字。我想爬一些喵星人的照片，那就搜猫就行了。
 
@@ -38,17 +38,17 @@ import requests
 
 所以按F12，调出浏览器的控制台，求证一下自己的假设。
 
-<img src="3.png" width="50%"><img src="4.png" width="50%">
+<img src="https://raw.githubusercontent.com/LawyZheng/shared-document/master/tuchong/3.png" width="50%"><img src="https://raw.githubusercontent.com/LawyZheng/shared-document/master/tuchong/4.png" width="50%">
 
 在左图里可以看到，本来是没有任何数据的，但在滚轮向下滚的过程中，发现数据慢慢被加载出来了。
 
 就你了，那个postxxxpage=2的玩意儿，看名字像不像是第几页的意思。所以点进去看看。
 
-<img src="5.png" width="100%">
+<img src="https://raw.githubusercontent.com/LawyZheng/shared-document/master/tuchong/5.png" width="100%">
 
 可以把data里的数据翻出来看看，里面都是关于图片的一些数据信息。然后去找这个数据的URL接口就可以啦。
 
-<img src="6.png" width="100%">
+<img src="https://raw.githubusercontent.com/LawyZheng/shared-document/master/tuchong/6.png" width="100%">
 
 可以看到请求这个数据的URL就是这个了。但我们想要一般都是可以自己定制的动态的URL,而不是静态的固定的URL。所以我们可以观察一下URL的构成。
 
@@ -104,7 +104,7 @@ for each_images in json_data['data']['post_list']:
 
 解析循环过程我就不叙述了，可以自己去摸索摸索。我就关于 ft640 这个键说明一下。
 
-<img src="7.png" width="100%">
+<img src="https://raw.githubusercontent.com/LawyZheng/shared-document/master/tuchong/7.png" width="100%">
 
 事实上每张照片都有这几个数据，这些都是代表不同的尺寸而已。观察就可以发现图片的URL都是由 https://photo.tuchong.com/uers&#95;id/尺寸/img&#95;id.webp(jpg) 构成的。不过这之中还缺了一个全尺寸，就是f。所以要是想要全尺寸图片的话，把ft640换成f就好了。当然，想要别的尺寸的话，就提取对应的URL就可以了。
 
@@ -312,3 +312,9 @@ IMAGES_EXPIRES = 30
 第四个IMAGES&#95;EXPIRES表示的是爬取的数据有效期，单位是天。设置成30就代表，不重复爬取30天之内已经爬取过的数据。
 
 OK，然后去你的命令行跑一下爬虫。你就会发现它飞起来了。(刚开始可能要耐心地等一段时间才会开始下载图片)
+
+[github链接：requests版](https://github.com/LawyZheng/Public_Code/blob/master/tuchong.py)
+
+[github链接：scrapy版](https://github.com/LawyZheng/Public_Code/tree/master/tuchong_spider/tuchong_spider)
+
+[知乎链接](https://zhuanlan.zhihu.com/p/86647389)
