@@ -1,6 +1,6 @@
 # Table of contents
 
-* [使用手册](README.md)
+* [从Demo开始学Python](README.md)
 * [encrypt](encrypt.md)
 * [tuchong](tuchong/README.md)
   * [tuchong](tuchong/tuchong.md)

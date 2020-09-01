@@ -2,7 +2,7 @@
 description: 这是一个DEMO说明文档
 ---
 
-# 使用手册
+# 从Demo开始学Python
 
 ## Getting Super Powers
 
