@@ -1,3 +1,5 @@
+# intro
+
 这篇文章将分为上下两个部分，用100多行Python来看看今日（过去的24小时内）的世界上发生了什么。
 
 上篇，会写到怎么获取数据，整理数据。
@@ -18,6 +20,7 @@ import pandas
 import re
 from sqlalchemy import create_engine
 ```
+
 身边很多朋友都对我说，让我多出去走走，多接触接触这个世界。嗯...鉴于我实在是不想迈出家门一步，也懒得和人聊天。所以为了不成为山林野人，我就想何不用代码来告诉我今天的世界都发生什么事了呢？
 
 不过话说回来，想知道今天世界发生什么了，那你也总得有消息呀。这个东西计算机可凭空捏造不出来，所以呢，这里就提供给大家一个良心榜单中心 —— 今日热榜。这个网站概括了，微博、知乎、百度、天涯、哔哩哔哩、抖音等等等各大社交新闻APP的热门话题。而且它上面的内容都没有被推荐算法 "污染" 过，还是很客观的。
@@ -26,7 +29,7 @@ from sqlalchemy import create_engine
 
 ![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-78388311e80058fc0a92d1eed36fa950_b.png?raw=true)
 
-所以我果断鼠标右键 -> 查看网页源代码。往下拉一拉，马上乐开花。
+所以我果断鼠标右键 -&gt; 查看网页源代码。往下拉一拉，马上乐开花。
 
 ![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-5e57a3fc637b3e2e1505ff72fb44a41b_b.png?raw=true)
 
@@ -45,10 +48,9 @@ print(html)
 
 print出来看看。perfect，一点防爬虫的措施都没有，完美的下载了网页源代码的所有内容。
 
-好，接下来就是怎么寻找自己需要的数据了呗。回到网页上，鼠标右击 -> 检查。
+好，接下来就是怎么寻找自己需要的数据了呗。回到网页上，鼠标右击 -&gt; 检查。
 
 ![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-5c7e93a3496e51c2aee9d431cb2f9b97_b.png?raw=true)
-
 
 鼠标点击这个按钮，让他变成蓝色（Chrome是蓝色的，其他浏览器不知道是不是蓝色）。然后移动你的鼠标到微博的空白区域，直到你看到微博这个区块都变成了蓝色。再看看下面的那个代码部分，把 &lt;div class="cc-cd" id="node-1"&gt; 这个标签关上。
 
@@ -59,7 +61,6 @@ print出来看看。perfect，一点防爬虫的措施都没有，完美的下�
 好的，到这我们已经不难看出规律了。这些 &lt;div class="cc-cd" id="xxxx"&gt; 的标签就是用来管理一个个区块榜单的，那我们要获取的榜单数据自然都在这里面，所以用BeautifulSoup把这些都筛选出来就完事了呗。
 
 ![](https://github.com/LawyZheng/shared-document/blob/master/todayhot_spider_1/v2-631b94c3ffd4c1a33a124af2998ba3bc_b.png?raw=true)
-
 
 ```python
 def get_nodes(html):
@@ -79,7 +80,7 @@ print结果太长了，我们就看看nodes变量的长度好了，是不是36�
 df = pandas.DataFrame()
 ```
 
-那接下来呢。在我们把所有的数据，写到这个df变量里之前，需要先思考一下怎么去构建这个数据表，我们需要的列有 "content(内容)"、"url(内容的地址连接，可要可不要)"、"source(该内容的来源，即微博、微信还是什么的)"、"start&#95;time(该内容是何时开始上榜的)"、"end&#95;time(该内容是何时出榜的)"。
+那接下来呢。在我们把所有的数据，写到这个df变量里之前，需要先思考一下怎么去构建这个数据表，我们需要的列有 "content\(内容\)"、"url\(内容的地址连接，可要可不要\)"、"source\(该内容的来源，即微博、微信还是什么的\)"、"start\_time\(该内容是何时开始上榜的\)"、"end\_time\(该内容是何时出榜的\)"。
 
 用之前寻找榜单区块的方法，不难找到。榜单的名字是在 &lt;div class="cc-cd-lb"&gt;这个标签下的。
 
@@ -184,8 +185,7 @@ def get_each_node_data(df, nodes):
 
 这里筛选微信的内容我用了正则表达式，简单点的话用字符串分割也没什么问题。纯属个人喜好问题。好了，那我们数据也获取到了，也整理好了，保存下来就大功告成了！
 
-如果你想保存成excel（虽然我不推荐），那就和点击就送屠龙宝刀一样方便，DataFrame类提供了一键生成excel文件的功能。
-df.to_excel('今日热榜.xlsx')
+如果你想保存成excel（虽然我不推荐），那就和点击就送屠龙宝刀一样方便，DataFrame类提供了一键生成excel文件的功能。 df.to\_excel\('今日热榜.xlsx'\)
 
 我比较推荐的是存成json文件，或者录入数据库。后者相较于前者要麻烦一丢丢，如果想了解详情，可以点击这里，看看我之前写的关于Python写入sqlite3的文章。
 
@@ -199,8 +199,8 @@ df.to_json('今日热榜.json')
 engine = create_engine('sqlite:///' + path)  # path为数据库的路径(推荐写成绝对路径)
 df.to_sql(table, con=engine, if_exists='replace') # table为保存数据库table的名字，可以随便写，DataFrame会为你自动创建
 ```
-是不是大功告成了....呢？等等等等一下，戳都嘛跌，这里面还有一个小Bug，当你第一次运行的时候，他完美的执行了。但是当你每二次运行程序的时候，发现前一次的数据被覆盖掉了！！解决办法也很简单，只需在初始化DataFrame的时候，不要初始化一个空的df，直接从上一次运行产生的excel文件，或json文件，或数据库中读取数据是不是就可以了呗（以下为方便只写了excel的，其他方法可以自行查阅一下资料）。
-所以就修改一下下代码就好了。
+
+是不是大功告成了....呢？等等等等一下，戳都嘛跌，这里面还有一个小Bug，当你第一次运行的时候，他完美的执行了。但是当你每二次运行程序的时候，发现前一次的数据被覆盖掉了！！解决办法也很简单，只需在初始化DataFrame的时候，不要初始化一个空的df，直接从上一次运行产生的excel文件，或json文件，或数据库中读取数据是不是就可以了呗（以下为方便只写了excel的，其他方法可以自行查阅一下资料）。 所以就修改一下下代码就好了。
 
 ```python
 url = 'https://tophub.today'
@@ -218,3 +218,4 @@ df.to_excel('今日热榜.xlsx')
 [GitHub源代码链接](https://github.com/LawyZheng/Public_Code/blob/master/today_hot_spider.py)
 
 [知乎链接](https://zhuanlan.zhihu.com/p/81010673)
+
